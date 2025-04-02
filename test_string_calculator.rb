@@ -32,4 +32,9 @@ class TestStringCalculator < Minitest::Test
   def test_custom_delimiter
     assert_equal 3, @calculator.add("//;\n1;2")
   end
+
+  # Test case: Verifies that the add method raises an error when negative numbers are included in the input
+  def test_negative_numbers
+    assert_raises(RuntimeError) { @calculator.add("1,-2,3,-4") }
+  end
 end
