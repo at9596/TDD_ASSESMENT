@@ -15,17 +15,19 @@ class StringCalculator
       # Replace new line characters with commas
       numbers = numbers.gsub("\n", ",")
     end
-
+    # Split the string by commas, convert each element to an integer, and sum them
+    nums = numbers.split(',').map(&:to_i)
+    
     # Find all negative numbers in the parsed input
     negatives = nums.select { |num| num < 0 }
 
     # If any negative numbers are found, raise an exception with the list of negative numbers
     if negatives.any?
-    raise "negative numbers not allowed #{negatives.join(',')}"
+     raise "negative numbers not allowed #{negatives.join(',')}"
     end
 
-    # Split the string by commas, convert each element to an integer, and sum them
-    nums = numbers.split(',').map(&:to_i)
-    nums.sum
+    
+    # Ignore numbers greater than 1000 and calculate the sum
+    nums.reject { |num| num > 1000 }.sum
   end
 end
