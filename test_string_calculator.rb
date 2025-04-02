@@ -22,4 +22,14 @@ class TestStringCalculator < Minitest::Test
   def test_two_numbers
     assert_equal 6, @calculator.add("1,5")
   end
+
+  # Test case: Verifies that the add method correctly handles numbers separated by new lines
+  def test_numbers_with_new_lines
+    assert_equal 6, @calculator.add("1\n2,3")
+  end
+
+  # Test case: Verifies that the add method correctly handles custom delimiters
+  def test_custom_delimiter
+    assert_equal 3, @calculator.add("//;\n1;2")
+  end
 end
