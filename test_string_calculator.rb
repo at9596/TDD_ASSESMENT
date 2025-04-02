@@ -37,4 +37,11 @@ class TestStringCalculator < Minitest::Test
   def test_negative_numbers
     assert_raises(RuntimeError) { @calculator.add("1,-2,3,-4") }
   end
+
+   # Test case: Numbers greater than 1000 should be ignored
+   def test_ignore_numbers_greater_than_1000
+    assert_equal 2, @calculator.add("2,1001"), "Expected 2 when input is '2,1001' (1001 should be ignored)"
+    assert_equal 1002, @calculator.add("2,1000,1001"), "Expected 1002 when input is '2,1000,1001' (1001 should be ignored)"
+    assert_equal 0, @calculator.add("1001,2000"), "Expected 0 when input is '1001,2000' (all numbers are ignored)"
+  end
 end
