@@ -8,6 +8,7 @@ This project implements a **String Calculator** using the Test-Driven Developmen
 - Handle new lines (`\n`) as delimiters.
 - Support custom delimiters.
 - Raise an exception for negative numbers, listing all negatives found.
+- Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
 
 ## Installation
 1. Clone the repository:
