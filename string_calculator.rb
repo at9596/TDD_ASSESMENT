@@ -4,6 +4,18 @@ class StringCalculator
 
     delimiters = [",", "\n"]
     
+    numbers,delimiters = extract_delimiters(numbers, delimiters)
+
+    regex_pattern = Regexp.union(delimiters)
+    nums = numbers.split(regex_pattern).map(&:to_i)
+    
+    negatives = handle_negatives(nums)
+    
+    nums.reject { |num| num > 1000 }.sum
+  end
+
+  private
+  def extract_delimiters(numbers, delimiters)
     if numbers.start_with?("//")
       delimiter_section, numbers = numbers.split("\n", 2)
       custom_delimiters = delimiter_section[2..]
@@ -15,12 +27,13 @@ class StringCalculator
       end
     end
     
-    regex_pattern = Regexp.union(delimiters)
-    nums = numbers.split(regex_pattern).map(&:to_i)
-    
+    [numbers, delimiters]
+  end
+
+  def handle_negatives(nums)
     negatives = nums.select { |num| num < 0 }
-    raise "negative numbers not allowed #{negatives.join(',')}" if negatives.any?
+    raise "Negatives not allowed: #{negatives.join(', ')}" unless negatives.empty?
     
-    nums.reject { |num| num > 1000 }.sum
+    nums
   end
 end
