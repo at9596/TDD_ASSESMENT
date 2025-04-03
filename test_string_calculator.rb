@@ -44,4 +44,10 @@ class TestStringCalculator < Minitest::Test
     assert_equal 1002, @calculator.add("2,1000,1001"), "Expected 1002 when input is '2,1000,1001' (1001 should be ignored)"
     assert_equal 0, @calculator.add("1001,2000"), "Expected 0 when input is '1001,2000' (all numbers are ignored)"
   end
+  
+  # Test case: Verifies that the add method correctly handles delimiters of any length
+  def test_delimiters_of_any_length
+    assert_equal 6, @calculator.add("//[***]\n1***2***3"), "Expected 6 when input is '1***2***3' with delimiter '***'"
+    assert_equal 10, @calculator.add("//[###]\n4###3###3"), "Expected 10 when input is '4###3###3' with delimiter '###'"
+  end
 end
